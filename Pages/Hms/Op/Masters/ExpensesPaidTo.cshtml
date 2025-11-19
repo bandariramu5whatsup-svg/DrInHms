@@ -1,0 +1,175 @@
+﻿@page
+@model HanuMediSoftCore.Pages.Hms.Op.Masters.ExpensesPaidToModel
+@{
+    ViewData["Title"] = "Expenses Paid To";
+    Layout = "_ProLayout";
+}
+<div class="container mt-3">
+
+    <div class="compact-header d-flex justify-content-between align-items-center">
+        <h3 class="page-title">Expenses Paid To</h3>
+
+        <div class="d-flex align-items-center gap-2">
+
+            <form method="get" class="d-flex gap-2">
+                <input type="text"
+                       name="search"
+                       value="@Model.Search"
+                       class="form-control search-box"
+                       placeholder="Search..." />
+                <button class="btn btn-outline-secondary btn-sm btn-sm-custom">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+
+            <form method="post">
+                <button formaction="?handler=AddNew"
+                        class="btn btn-primary btn-sm btn-sm-custom">
+                    <i class="bi bi-plus-circle me-1"></i> Add
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-sm-custom">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th class="text-center">Active</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (Model.ShowNewRow)
+                {
+                    <tr class="new-row">
+                        <form method="post">
+
+                        <td>
+                            <input class="form-control form-control-sm-custom"
+                                   name="NewRow.ExpensesPaidToName"
+                                   placeholder="Name" />
+                        </td>
+
+                        <td>
+                            <input class="form-control form-control-sm-custom"
+                                   name="NewRow.ExpensesPaidToCode"
+                                   placeholder="Code" />
+                        </td>
+
+                        <td class="text-center">
+                            <input type="checkbox"
+                                   name="NewRow.IsActive"
+                                   value="1"
+                                   class="form-check-input checkbox-sm"
+                                   checked />
+                            <input type="hidden" name="NewRow.IsActive" value="0" />
+                        </td>
+
+                        <td class="text-center">
+                            <button formaction="?handler=SaveNew"
+                                    class="btn btn-success btn-sm btn-sm-custom">
+                                <i class="bi bi-check"></i>
+                            </button>
+                            <button formaction="?handler=CancelNew"
+                                    class="btn btn-secondary btn-sm btn-sm-custom">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </td>
+
+                        </form>
+                    </tr>
+                }
+
+                @for (int i = 0; i < Model.ListExpensesPaidTo.Count; i++)
+                {
+                    var u = Model.ListExpensesPaidTo[i];
+                    bool isEditing = Model.EditingId == u.ExpensesPaidToId;
+
+                    <tr class="@(isEditing ? "editing-row" : "")">
+                        <form method="post">
+
+                            <input type="hidden" name="EditRow.ExpensesPaidToId" value="@u.ExpensesPaidToId" />
+
+                        <td>
+                                @if (isEditing)
+                                {
+                                <input class="form-control form-control-sm-custom"
+                                       name="EditRow.ExpensesPaidToName"
+                                       value="@u.ExpensesPaidToName" />
+                                }
+                                else
+                                {
+                                    @u.ExpensesPaidToName
+                                }
+                        </td>
+
+                        <td>
+                                @if (isEditing)
+                                {
+                                <input class="form-control form-control-sm-custom"
+                                       name="EditRow.ExpensesPaidToCode"
+                                       value="@u.ExpensesPaidToCode" />
+                                }
+                                else
+                                {
+                                    @u.ExpensesPaidToCode
+                                }
+                        </td>
+
+                        <td class="text-center">
+                                @if (isEditing)
+                                {
+                                <input type="checkbox"
+                                       name="EditRow.IsActive"
+                                       value="1"
+                                       class="form-check-input checkbox-sm"
+                                    @(u.IsActive == 1 ? "checked" : "") />
+
+                                <input type="hidden" name="EditRow.IsActive" value="0" />
+                                }
+                                else
+                                {
+                                <span class="status-badge @(u.IsActive == 1 ? "status-active" : "status-inactive")">
+                                        @(u.IsActive == 1 ? "Yes" : "No")
+                                </span>
+                                }
+                        </td>
+
+                        <td class="text-center">
+                                @if (isEditing)
+                                {
+                                <button formaction="?handler=SaveEdit&id=@u.ExpensesPaidToId"
+                                        class="btn btn-success btn-sm btn-sm-custom">
+                                    <i class="bi bi-check"></i>
+                                </button>
+
+                                <button formaction="?handler=CancelEdit"
+                                        class="btn btn-secondary btn-sm btn-sm-custom">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                                }
+                                else
+                                {
+                                <button formaction="?handler=Edit&id=@u.ExpensesPaidToId"
+                                        class="btn btn-outline-primary btn-sm btn-sm-custom">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                }
+                        </td>
+
+                        </form>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

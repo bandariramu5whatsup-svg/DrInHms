@@ -1,0 +1,180 @@
+﻿@page
+@model HanuMediSoftCore.Pages.Hms.Op.Masters.ExpensesPurposeModel
+@{
+    ViewData["Title"] = "Expenses Purpose";
+    Layout = "_ProLayout";
+}
+<div class="container mt-3">
+
+    <!-- Header -->
+    <div class="compact-header d-flex justify-content-between align-items-center">
+        <h3 class="page-title">Expenses Purpose</h3>
+
+        <div class="d-flex align-items-center gap-2">
+            <form method="get" class="d-flex gap-2">
+                <input type="text"
+                       name="search"
+                       value="@Model.Search"
+                       class="form-control search-box"
+                       placeholder="Search..." />
+
+                <button class="btn btn-outline-secondary btn-sm btn-sm-custom">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+
+            <form method="post">
+                <button class="btn btn-primary btn-sm btn-sm-custom"
+                        formaction="?handler=AddNew">
+                    <i class="bi bi-plus-circle me-1"></i> Add
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-sm-custom">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th class="text-center">Active</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- NEW ROW -->
+                @if (Model.ShowNewRow)
+                {
+                    <tr class="new-row">
+                        <form method="post">
+
+                        <td>
+                            <input class="form-control form-control-sm-custom"
+                                   name="NewRow.ExpensesPurposeName"
+                                   placeholder="Purpose name" />
+                        </td>
+
+                        <td>
+                            <input class="form-control form-control-sm-custom"
+                                   name="NewRow.ExpensesPurposeCode"
+                                   placeholder="Code" />
+                        </td>
+
+                        <td class="text-center">
+                            <input type="checkbox"
+                                   class="form-check-input checkbox-sm"
+                                   name="NewRow.IsActive"
+                                   value="1"
+                                   checked />
+                            <input type="hidden" name="NewRow.IsActive" value="0" />
+                        </td>
+
+                        <td class="text-center">
+                            <button class="btn btn-success btn-sm btn-sm-custom"
+                                    formaction="?handler=SaveNew">
+                                <i class="bi bi-check"></i>
+                            </button>
+
+                            <button class="btn btn-secondary btn-sm btn-sm-custom"
+                                    formaction="?handler=CancelNew">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </td>
+
+                        </form>
+                    </tr>
+                }
+
+                <!-- EXISTING ROWS -->
+                @foreach (var item in Model.ListExpensesPurpose)
+                {
+                    bool isEditing = Model.EditingId == item.ExpensesPurposeId;
+
+                    <tr class="@(isEditing ? "editing-row" : "")">
+                        <form method="post">
+
+                            <input type="hidden"
+                                   name="EditRow.ExpensesPurposeId"
+                                   value="@item.ExpensesPurposeId" />
+
+                        <td>
+                                @if (isEditing)
+                                {
+                                <input class="form-control form-control-sm-custom"
+                                       name="EditRow.ExpensesPurposeName"
+                                       value="@item.ExpensesPurposeName" />
+                                }
+                                else
+                                {
+                                    @item.ExpensesPurposeName
+                                }
+                        </td>
+
+                        <td>
+                                @if (isEditing)
+                                {
+                                <input class="form-control form-control-sm-custom"
+                                       name="EditRow.ExpensesPurposeCode"
+                                       value="@item.ExpensesPurposeCode" />
+                                }
+                                else
+                                {
+                                    @item.ExpensesPurposeCode
+                                }
+                        </td>
+
+                        <td class="text-center">
+                                @if (isEditing)
+                                {
+                                <input type="checkbox"
+                                       name="EditRow.IsActive"
+                                       value="1"
+                                       class="form-check-input checkbox-sm"
+                                    @(item.IsActive == 1 ? "checked" : "") />
+
+                                <input type="hidden" name="EditRow.IsActive" value="0" />
+                                }
+                                else
+                                {
+                                <span class="status-badge @(item.IsActive == 1 ? "status-active" : "status-inactive")">
+                                        @(item.IsActive == 1 ? "Yes" : "No")
+                                </span>
+                                }
+                        </td>
+
+                        <td class="text-center">
+                                @if (isEditing)
+                                {
+                                <button class="btn btn-success btn-sm btn-sm-custom"
+                                        formaction="?handler=SaveEdit&id=@item.ExpensesPurposeId">
+                                    <i class="bi bi-check"></i>
+                                </button>
+
+                                <button class="btn btn-secondary btn-sm btn-sm-custom"
+                                        formaction="?handler=CancelEdit">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                                }
+                                else
+                                {
+                                <button class="btn btn-outline-primary btn-sm btn-sm-custom"
+                                        formaction="?handler=Edit&id=@item.ExpensesPurposeId">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                }
+                        </td>
+
+                        </form>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
