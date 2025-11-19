@@ -1,0 +1,25 @@
+﻿@page
+@model HanuMediSoftCore.Pages.RegisterModel
+@{
+}
+<h2>Register</h2>
+
+<form method="post">
+    <label>Username</label>
+    <input name="UserName" class="form-control" required />
+
+    <label>Password</label>
+    <input type="password" name="Password" class="form-control" required />
+
+    <button class="btn btn-primary mt-2">Register</button>
+</form>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-success mt-3">@Model.Message</div>
+}
+
+@if (Model.Error != null)
+{
+    <div class="alert alert-danger mt-3">@Model.Error</div>
+}
