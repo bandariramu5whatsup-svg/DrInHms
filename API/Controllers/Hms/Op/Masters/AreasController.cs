@@ -14,6 +14,8 @@ namespace HanuMediSoftCore.API.Controllers.Hms.Op.Masters
             _service = service;
         }
 
+        //ramu begin
+
         [HttpPost("SaveAreas")]
         public IActionResult SaveAreas([FromBody] Area model)
         {
