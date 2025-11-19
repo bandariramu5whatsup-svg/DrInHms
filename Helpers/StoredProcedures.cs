@@ -56,5 +56,23 @@
         public const string Save = "SpOpInsertSpecialization";
     }
 
+    public class ExpensesPaidToProcedures
+    {
+        public const string Get = "SpOpGetExpensesPaidTo";
+        public const string Save = "SpOpInsertExpensesPaidTo";
+    }
+
+    public class ExpensesPurposeProcedures
+    {
+        public const string Get = "SpOpGetExpensesPurpose";
+        public const string Save = "SpOpInsertExpensesPurpose";
+    }
+
+    public class ExpensesTypesProcedures
+    {
+        public const string Get = "SpOpGetExpensesTypes";
+        public const string Save = "SpOpInsertExpensesTypes";
+    }
+
 
 }
