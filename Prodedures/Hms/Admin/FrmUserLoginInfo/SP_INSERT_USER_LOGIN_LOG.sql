@@ -1,0 +1,35 @@
+GO
+GO
+CREATE OR ALTER PROCEDURE SP_INSERT_USER_LOGIN_LOG
+(
+    @USER_ID           VARCHAR(50),
+    @IP_ADDRESS        NVARCHAR(50),
+    @BROWSER_INFO      NVARCHAR(500),
+    @ENTRY_USER_NAME   VARCHAR(100),
+    @ENTRY_USER_ID     VARCHAR(50),
+    @TERMINAL_ID       VARCHAR(100)
+)
+AS
+BEGIN
+    INSERT INTO USER_LOGIN_LOGS
+    (
+        USER_ID,
+        IP_ADDRESS,
+        BROWSER_INFO,
+        ENTRY_USER_NAME,
+        ENTRY_USER_ID,
+        TERMINAL_ID
+    )
+    VALUES
+    (
+        @USER_ID,
+        @IP_ADDRESS,
+        @BROWSER_INFO,
+        @ENTRY_USER_NAME,
+        @ENTRY_USER_ID,
+        @TERMINAL_ID
+    );
+
+    SELECT SCOPE_IDENTITY() AS LOG_ID;
+END
+GO

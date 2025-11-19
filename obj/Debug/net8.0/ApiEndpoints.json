@@ -1,0 +1,338 @@
+[
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.AreasController",
+    "Method": "GetAreas",
+    "RelativePath": "api/Areas/GetAreas",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Area",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.AreasController",
+    "Method": "SaveAreas",
+    "RelativePath": "api/Areas/SaveAreas",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Area",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.CountriesController",
+    "Method": "GetCountries",
+    "RelativePath": "api/Countries/GetCountries",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Country",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.CountriesController",
+    "Method": "SaveCountries",
+    "RelativePath": "api/Countries/SaveCountries",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Country",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.DepartmentController",
+    "Method": "GetDepartments",
+    "RelativePath": "api/Department/GetDepartments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Department",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.DepartmentController",
+    "Method": "SaveDepartments",
+    "RelativePath": "api/Department/SaveDepartments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Department",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.DistrictsController",
+    "Method": "FillStates",
+    "RelativePath": "api/Districts/FillStates",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.State",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.DistrictsController",
+    "Method": "GetDistricts",
+    "RelativePath": "api/Districts/GetDistricts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.District",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.DistrictsController",
+    "Method": "SaveDistricts",
+    "RelativePath": "api/Districts/SaveDistricts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.District",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.PlacesController",
+    "Method": "GetPlaces",
+    "RelativePath": "api/Places/GetPlaces",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Place",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.PlacesController",
+    "Method": "SavePlaces",
+    "RelativePath": "api/Places/SavePlaces",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Place",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.ServiceTypesController",
+    "Method": "GetServiceTypes",
+    "RelativePath": "api/ServiceTypes/GetServiceTypes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.ServiceType",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.ServiceTypesController",
+    "Method": "SaveServiceType",
+    "RelativePath": "api/ServiceTypes/SaveServiceType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.ServiceType",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.SpecilizationController",
+    "Method": "GetSpecilizations",
+    "RelativePath": "api/Specilization/GetSpecilizations",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Specialization",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.SpecilizationController",
+    "Method": "SaveDepartments",
+    "RelativePath": "api/Specilization/SaveSpecilizations",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Specialization",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.StatesController",
+    "Method": "FillCountries",
+    "RelativePath": "api/States/FillCountries",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.State",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.StatesController",
+    "Method": "GetStates",
+    "RelativePath": "api/States/GetStates",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.State",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.StatesController",
+    "Method": "SaveStates",
+    "RelativePath": "api/States/SaveStates",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.State",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.UnitsController",
+    "Method": "GetUnits",
+    "RelativePath": "api/Units/GetUnits",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Unit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Op.Masters.UnitsController",
+    "Method": "SaveUnits",
+    "RelativePath": "api/Units/SaveUnits",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Op.Masters.Unit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HanuMediSoftCore.API.Controllers.Hms.Admin.UsersController",
+    "Method": "ValidateUserLogin",
+    "RelativePath": "api/Users/ValidateUserLogin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HanuMediSoftCore.Models.Hms.Admin.Users",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,327 @@
+﻿@page
+@model HanuMediSoftCore.Pages.LoginModel
+@{
+    
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - eHMS</title>
+    <style>
+        :root {
+            --primary: #1a4b8c;
+            --primary-dark: #0d3a73;
+            --primary-light: #2c5da0;
+            --accent: #2e8b57;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --border: #ced4da;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 85%;
+            background: var(--primary);
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .top-links {
+            text-align: right;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+            .top-links span {
+                cursor: pointer;
+                transition: color 0.3s;
+                padding: 5px 10px;
+                border-radius: 4px;
+            }
+
+                .top-links span:hover {
+                    color: #a8c6f0;
+                    background: rgba(255, 255, 255, 0.1);
+                }
+
+        .login-content {
+            background: white;
+            color: #333;
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .left-section {
+            width: 75%;
+            border-right: 1px solid var(--gray-light);
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+            .logo img {
+                width: 200px;
+            }
+
+        .left-section p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .illustration {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border-radius: 6px;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            margin-top: auto;
+        }
+
+            .illustration h3 {
+                margin-top: 0;
+                font-weight: 500;
+                font-size: 18px;
+            }
+
+            .illustration p {
+                color: rgba(255, 255, 255, 0.9);
+                font-size: 14px;
+                margin-bottom: 0;
+            }
+
+        .right-section {
+            width: 25%;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+            input[type=text]:focus, input[type=password]:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.2);
+                outline: none;
+            }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+            .checkbox-container input {
+                margin-right: 8px;
+            }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+            button:hover {
+                background: var(--primary-dark);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+        .btn-secondary {
+            background: var(--gray-light);
+            color: var(--gray);
+        }
+
+            .btn-secondary:hover {
+                background: #d1d5db;
+                color: #333;
+            }
+
+        .links button {
+            width: 100%;
+            background: var(--gray-light);
+            color: var(--gray);
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+            .links button:hover {
+                background: #d1d5db;
+                color: #333;
+            }
+
+        .help-section {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: white;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @@media (max-width: 768px) {
+            .login-content
+
+        {
+            flex-direction: column;
+            padding: 20px;
+            gap: 15px;
+        }
+
+        .left-section, .right-section {
+            width: 100%;
+            border: none;
+            padding: 0;
+        }
+
+        .left-section {
+            margin-bottom: 10px;
+        }
+
+        .top-links {
+            justify-content: center;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="top-links">
+            <span>Query Mail</span>
+            <span>Feed Back</span>
+            <span>Chat</span>
+        </div>
+
+        <div class="login-content">
+            <!-- LEFT SECTION -->
+            <div class="left-section">
+                <div class="logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwy9b7wgDHnwRGIoF9JuQD8-uw0mLv829zgA&s" alt="DrIn Pvt Ltd Logo" height="80">
+                </div>
+                <h1>
+                    Welcome to DrIn Healthcare Solutions
+                </h1>
+                <p>
+                    Delivering fast, secure, and reliable hospital management for modern healthcare —
+                    ensuring accuracy, improving patient outcomes, and simplifying operations across all departments.
+                </p>
+                <div style="text-align: center;">
+                    <img src="https://img.freepik.com/free-vector/doctor-technicians-discussing-medical-record_1262-19767.jpg?semt=ais_incoming&w=740&q=50"
+                         style="height:250px; width:auto;" />
+                </div>
+
+                <div class="illustration" style="display: none;">
+                    <h3>Healthcare Management Simplified</h3>
+                    <p>Secure, efficient, and user-friendly platform for modern healthcare facilities</p>
+                </div>
+            </div>
+
+            <!-- RIGHT SECTION -->
+            <div class="right-section">
+                <h2>Login</h2>
+                <form method="post">
+                <div class="form-group">
+                    <input asp-for="Username" type="text" placeholder="User Name" />
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="Password" type="password" placeholder="Password" />
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                
+                 <div class="btn-row">
+                    
+                        <button type="submit">Login</button>
+                   
+                    <button class="btn-secondary">Refresh</button>
+                </div>
+                </form>
+                
+
+                <div class="links">
+                    <button>Medi Super Speciality Hospital</button>
+                    <button>Hospital Address</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="help-section">
+            Help Line No: 9100111265, 9701203029 | Mail Id: anilkumarvishwapathi@gmail.com
+        </div>
+    </div>
+</body>
+</html>

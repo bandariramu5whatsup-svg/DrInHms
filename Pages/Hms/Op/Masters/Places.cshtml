@@ -1,0 +1,191 @@
+﻿@page
+@model HanuMediSoftCore.Pages.Hms.Op.Masters.PlacesModel
+@{
+    Layout = "_ProLayout";
+}
+
+<div class="container mt-3">
+
+    <!-- Header -->
+    <div class="compact-header d-flex justify-content-between align-items-center">
+        <h3 class="page-title">countries</h3>
+
+        <div class="d-flex align-items-center gap-2">
+
+            <!-- Search -->
+            <form method="get" class="d-flex gap-2">
+                <input type="text"
+                       name="search"
+                       value="@Model.Search"
+                       class="form-control search-box"
+                       placeholder="Search countries..." />
+                <button class="btn btn-outline-secondary btn-sm btn-sm-custom">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+
+            <!-- Add -->
+            <form method="post">
+                <button formaction="?handler=AddNew"
+                        class="btn btn-primary btn-sm btn-sm-custom">
+                    <i class="bi bi-plus-circle me-1"></i> Add
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-sm-custom">
+            <thead>
+                <tr>
+                    <th>State Name</th>
+                    <th>Description</th>
+                    <th class="text-center">Active</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- NEW ROW -->
+                @if (Model.ShowNewRow)
+                {
+                    <tr class="new-row">
+                        <form method="post">
+
+                        <td>
+                            <input class="form-control form-control-sm-custom"
+                                   name="NewRow.StateName"
+                                   placeholder="State name" />
+                        </td>
+
+                        <td>
+                            <input class="form-control form-control-sm-custom"
+                                   name="NewRow.StateCode"
+                                   placeholder="State Code" />
+                        </td>
+
+                        <td class="text-center">
+                            <!-- CHECKBOX MUST SEND 1/0 FOR INT BINDING -->
+                            <input type="checkbox"
+                                   class="form-check-input checkbox-sm"
+                                   name="NewRow.IsActive"
+                                   value="1"
+                                   checked />
+
+                            <input type="hidden"
+                                   name="NewRow.IsActive"
+                                   value="0" />
+                        </td>
+
+                        <td class="text-center">
+                            <button formaction="?handler=SaveNew"
+                                    class="btn btn-success btn-sm btn-sm-custom">
+                                <i class="bi bi-check"></i>
+                            </button>
+
+                            <button formaction="?handler=CancelNew"
+                                    class="btn btn-secondary btn-sm btn-sm-custom">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </td>
+
+                        </form>
+                    </tr>
+                }
+
+                <!-- EXISTING ROWS -->
+                @for (int i = 0; i < Model.ListPlaces.Count; i++)
+                {
+                    var u = Model.ListPlaces[i];
+                    bool isEditing = (Model.EditingId == u.AreaId);
+
+                    <tr class="@(isEditing ? "editing-row" : "")">
+                        <form method="post">
+
+                            <input type="hidden" name="EditRow.StateId" value="@u.PlaceId" />
+
+                            <!-- UNIT NAME -->
+                        <td>
+                                @if (isEditing)
+                                {
+                                <input class="form-control form-control-sm-custom"
+                                       name="EditRow.PlaceName"
+                                       value="@u.PlaceName" />
+                                }
+                                else
+                                {
+                                    @u.PlaceName
+                                }
+                        </td>
+
+                        <!-- DESCRIPTION -->
+                        <td>
+                                @if (isEditing)
+                                {
+                                <input class="form-control form-control-sm-custom"
+                                       name="EditRow.PlaceCode"
+                                       value="@u.PlaceCode" />
+                                }
+                                else
+                                {
+                                    @u.PlaceCode
+                                }
+                        </td>
+
+                        <!-- ACTIVE -->
+                        <td class="text-center">
+                                @if (isEditing)
+                                {
+                                <!-- Checkbox must send numeric values -->
+                                <input type="checkbox"
+                                       class="form-check-input checkbox-sm"
+                                       name="EditRow.IsActive"
+                                       value="1"
+                                    @(u.IsActive == 1 ? "checked" : "") />
+
+                                <input type="hidden"
+                                       name="EditRow.IsActive"
+                                       value="0" />
+                                }
+                                else
+                                {
+                                <span class="status-badge @(u.IsActive == 1 ? "status-active" : "status-inactive")">
+                                        @(u.IsActive == 1 ? "Yes" : "No")
+                                </span>
+                                }
+                        </td>
+
+                        <!-- ACTIONS -->
+                        <td class="text-center">
+                                @if (isEditing)
+                                {
+                                <button formaction="?handler=SaveEdit&id=@u.PlaceId"
+                                        class="btn btn-success btn-sm btn-sm-custom">
+                                    <i class="bi bi-check"></i>
+                                </button>
+
+                                <button formaction="?handler=CancelEdit"
+                                        class="btn btn-secondary btn-sm btn-sm-custom">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                                }
+                                else
+                                {
+                                <button formaction="?handler=Edit&id=@u.StateId"
+                                        class="btn btn-outline-primary btn-sm btn-sm-custom">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                }
+                        </td>
+
+                        </form>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
