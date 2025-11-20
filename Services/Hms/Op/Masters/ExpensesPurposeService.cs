@@ -50,6 +50,20 @@ namespace HanuMediSoftCore.Services.Hms.Op.Masters
             var list = _db.ToList(dt);
             return list;
         }
+
+        public List<Dictionary<string, object?>> FillExpensesPurpose(ExpensesPurpose model)
+        {
+            var parameters = new Dictionary<string, object?>
+            {
+
+            };
+
+
+            // Using helper class
+            DataTable dt = _db.ExecuteSP(ExpensesPurposeProcedures.DdGet, parameters);
+            var list = _db.ToList(dt);
+            return list;
+        }
     }
 }
 
