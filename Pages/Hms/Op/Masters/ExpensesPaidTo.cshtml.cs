@@ -5,8 +5,15 @@ namespace HanuMediSoftCore.Pages.Hms.Op.Masters
 {
     public class ExpensesPaidToModel : BasePageModel
     {
-        string BaseUrl = "/api/ExpensesPaidTo/";
-        public ExpensesPaidToModel(IHttpClientFactory factory) : base(factory) { }
+        private readonly ILogger<ExpensesPaidToModel> _log;
+
+        const string BaseUrl = "/api/ExpensesPaidTo/";
+
+        public ExpensesPaidToModel(IHttpClientFactory factory, ILogger<ExpensesPaidToModel> logger)
+            : base(factory)
+        {
+            _log = logger;
+        }
 
         public List<ExpensesPaidTo> ListExpensesPaidTo { get; set; } = new();
 
@@ -21,19 +28,25 @@ namespace HanuMediSoftCore.Pages.Hms.Op.Masters
 
         private async Task LoadDataAsync()
         {
-            var url = BaseUrl + "GetExpensesPaidTo";
-
-            var request = new ExpensesPaidTo
+            try
             {
-                ExpensesPaidToId = "",
-                ExpensesPaidToName = Search ?? "",
-                PageIndex = 1,
-                PageSize = 50
-            };
+                var request = new ExpensesPaidTo
+                {
+                    ExpensesPaidToId = "",
+                    ExpensesPaidToName = Search ?? "",
+                    PageIndex = 1,
+                    PageSize = 50
+                };
 
-            ListExpensesPaidTo =
-                await PostApiAsync<List<ExpensesPaidTo>>(url, request)
-                ?? new List<ExpensesPaidTo>();
+                ListExpensesPaidTo =
+                    await PostApiAsync<List<ExpensesPaidTo>>(BaseUrl + "GetExpensesPaidTo", request)
+                    ?? new List<ExpensesPaidTo>();
+            }
+            catch (Exception ex)
+            {
+                _log.LogError(ex, "Failed to load ExpensesPaidTo list.");
+                ListExpensesPaidTo = new();
+            }
         }
 
         public async Task OnGetAsync() => await LoadDataAsync();
@@ -49,23 +62,17 @@ namespace HanuMediSoftCore.Pages.Hms.Op.Masters
 
         public async Task<IActionResult> OnPostSaveNewAsync()
         {
-            var dto = new ExpensesPaidTo
+            if (!ModelState.IsValid)
             {
-                ExpensesPaidToId = "0",
-                ExpensesPaidToName = NewRow.ExpensesPaidToName,
-                ExpensesPaidToCode = NewRow.ExpensesPaidToCode,
-                IsActive = NewRow.IsActive,
+                await LoadDataAsync();
+                ShowNewRow = true;
+                return Page();
+            }
 
-                CreatedById = HttpContext.Session.GetString("gUserId"),
-                CreatedByName = HttpContext.Session.GetString("gUserName"),
-                WorkstationId = HttpContext.Session.GetString("gTerminalId")
-            };
+            var dto = CreateDto("0", NewRow);
 
-            var url = BaseUrl + "SaveExpensesPaidTo";
-
-            var result = await PostApiAsync<object>(url, dto);
-
-            if (result == null)
+            var success = await SaveToApiAsync(dto);
+            if (!success)
             {
                 ModelState.AddModelError("", "Insert failed.");
                 await LoadDataAsync();
@@ -80,7 +87,7 @@ namespace HanuMediSoftCore.Pages.Hms.Op.Masters
         {
             await LoadDataAsync();
             EditingId = id;
-            EditRow = ListExpensesPaidTo.First(x => x.ExpensesPaidToId == id);
+            EditRow = ListExpensesPaidTo.FirstOrDefault(x => x.ExpensesPaidToId == id) ?? new();
             return Page();
         }
 
@@ -88,23 +95,17 @@ namespace HanuMediSoftCore.Pages.Hms.Op.Masters
 
         public async Task<IActionResult> OnPostSaveEditAsync(string id)
         {
-            var dto = new ExpensesPaidTo
+            if (!ModelState.IsValid)
             {
-                ExpensesPaidToId = id,
-                ExpensesPaidToName = EditRow.ExpensesPaidToName,
-                ExpensesPaidToCode = EditRow.ExpensesPaidToCode,
-                IsActive = EditRow.IsActive,
+                await LoadDataAsync();
+                EditingId = id;
+                return Page();
+            }
 
-                CreatedById = HttpContext.Session.GetString("gUserId"),
-                CreatedByName = HttpContext.Session.GetString("gUserName"),
-                WorkstationId = HttpContext.Session.GetString("gTerminalId")
-            };
+            var dto = CreateDto(id, EditRow);
 
-            var url = BaseUrl + "SaveExpensesPaidTo";
-
-            var result = await PostApiAsync<object>(url, dto);
-
-            if (result == null)
+            var success = await SaveToApiAsync(dto);
+            if (!success)
             {
                 ModelState.AddModelError("", "Update failed.");
                 await LoadDataAsync();
@@ -113,6 +114,37 @@ namespace HanuMediSoftCore.Pages.Hms.Op.Masters
             }
 
             return RedirectToPage();
+        }
+
+        // Shared DTO creator
+        private ExpensesPaidTo CreateDto(string id, ExpensesPaidTo source)
+        {
+            return new ExpensesPaidTo
+            {
+                ExpensesPaidToId = id,
+                ExpensesPaidToName = source.ExpensesPaidToName,
+                ExpensesPaidToCode = source.ExpensesPaidToCode,
+                IsActive = source.IsActive,
+
+                CreatedById = HttpContext.Session.GetString("gUserId"),
+                CreatedByName = HttpContext.Session.GetString("gUserName"),
+                WorkstationId = HttpContext.Session.GetString("gTerminalId")
+            };
+        }
+
+        // Shared save method
+        private async Task<bool> SaveToApiAsync(ExpensesPaidTo dto)
+        {
+            try
+            {
+                var result = await PostApiAsync<object>(BaseUrl + "SaveExpensesPaidTo", dto);
+                return result != null;
+            }
+            catch (Exception ex)
+            {
+                _log.LogError(ex, "Save operation failed.");
+                return false;
+            }
         }
     }
 }
