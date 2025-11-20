@@ -33,6 +33,52 @@ namespace HanuMediSoftCore.Helpers
             return dt;
         }
 
+        public SPResult ExecuteSPWithOutput(string storedProcedure, Dictionary<string, object?> parameters)
+        {
+            using SqlConnection con = new SqlConnection(_connectionString);
+            using SqlCommand cmd = new SqlCommand(storedProcedure, con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            if (parameters != null)
+            {
+                foreach (var param in parameters)
+                {
+                    if (param.Key == "@NewHeaderID")
+                    {
+                        var p = new SqlParameter(param.Key, SqlDbType.VarChar, 50)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(p);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                    }
+                }
+            }
+
+            using SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+
+            // capture output parameter values
+            var outputValues = new Dictionary<string, object>();
+            foreach (SqlParameter p in cmd.Parameters)
+            {
+                if (p.Direction == ParameterDirection.Output)
+                    outputValues[p.ParameterName] = p.Value;
+            }
+
+            return new SPResult
+            {
+                Table = dt,
+                Output = outputValues
+            };
+        }
+
+
         // Execute Insert/Update/Delete SP → returns affected rows
         public int ExecuteNonQuery(string storedProcedure, Dictionary<string, object?> parameters)
         {
@@ -86,6 +132,11 @@ namespace HanuMediSoftCore.Helpers
 }
 
 
+public class SPResult
+{
+    public DataTable Table { get; set; }
+    public Dictionary<string, object> Output { get; set; }
+}
 
 //using Microsoft.Data.SqlClient;
 //using System.Data;

@@ -60,18 +60,22 @@
     {
         public const string Get = "SpOpGetExpensesPaidTo";
         public const string Save = "SpOpInsertExpensesPaidTo";
+        public const string DdGet = "SpOpDdGetPaidTo";
     }
 
     public class ExpensesPurposeProcedures
     {
         public const string Get = "SpOpGetExpensesPurpose";
         public const string Save = "SpOpInsertExpensesPurpose";
+        public const string DdGet = "SpOpDdGetExpensesPurpose";
+
     }
 
     public class ExpensesTypesProcedures
     {
         public const string Get = "SpOpGetExpensesTypes";
         public const string Save = "SpOpInsertExpensesTypes";
+        public const string DdGet = "SpOpDdGetExpensesTypes";
     }
 
 
