@@ -47,5 +47,23 @@ namespace HanuMediSoftCore.API.Controllers.Hms.Op.Masters
                 });
             }
         }
+
+
+        [HttpPost("FillExpensesTypes")]
+        public IActionResult FillExpensesTypes([FromBody] ExpensesType model)
+        {
+            try
+            {
+                return Ok(_service!.FillExpensesTypes(model));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Error while fetching units",
+                    error = ex.Message
+                });
+            }
+        }
     }
 }

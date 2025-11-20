@@ -47,5 +47,26 @@ namespace HanuMediSoftCore.API.Controllers.Hms.Op.Masters
                 });
             }
         }
+
+        [HttpPost("FillExpensesPaidTo")]
+        public IActionResult FillExpensesPaidTo([FromBody] ExpensesPaidTo model)
+        {
+            try
+            {
+                return Ok(_service!.FillExpensesPaidTo(model));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Error while fetching units",
+                    error = ex.Message
+                });
+            }
+        }
+
     }
+
+
+
 }
