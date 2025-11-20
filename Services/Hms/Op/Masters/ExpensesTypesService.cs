@@ -14,7 +14,7 @@ namespace HanuMediSoftCore.Services.Hms.Op.Masters
             _db = db;
         }
 
-        public List<Dictionary<string, object?>> SaveExpensesTypes(ExpensesType model)
+        public List<Dictionary<string, object?>> GetExpensesTypes(ExpensesType model)
         {
             var parameters = new Dictionary<string, object?>
                 {
@@ -30,7 +30,7 @@ namespace HanuMediSoftCore.Services.Hms.Op.Masters
             return list;
         }
 
-        public List<Dictionary<string, object?>> SaveExpensesType(ExpensesType model)
+        public List<Dictionary<string, object?>> SaveExpensesTypes(ExpensesType model)
         {
             var parameters = new Dictionary<string, object?>
                         {

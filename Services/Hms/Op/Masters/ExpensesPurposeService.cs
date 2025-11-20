@@ -25,7 +25,7 @@ namespace HanuMediSoftCore.Services.Hms.Op.Masters
 
 
             // Using helper class
-            DataTable dt = _db.ExecuteSP(CountriesProcedures.Get, parameters);
+            DataTable dt = _db.ExecuteSP(ExpensesPurposeProcedures.Get, parameters);
             var list = _db.ToList(dt);
             return list;
         }
@@ -46,7 +46,7 @@ namespace HanuMediSoftCore.Services.Hms.Op.Masters
 
 
             // Using helper class
-            DataTable dt = _db.ExecuteSP(CountriesProcedures.Save, parameters);
+            DataTable dt = _db.ExecuteSP(ExpensesPurposeProcedures.Save, parameters);
             var list = _db.ToList(dt);
             return list;
         }
