@@ -25,7 +25,7 @@ BEGIN
     WHERE
         (@ExpensesPaidToId IS NULL OR @ExpensesPaidToId = '' OR ExpensesPaidToId = @ExpensesPaidToId)
         AND (@ExpensesPaidToName IS NULL OR ExpensesPaidToName LIKE '%' + @ExpensesPaidToName + '%')
-        AND (@IsActive IS NULL OR IsActive = @IsActive)
+        --AND (@IsActive IS NULL OR IsActive = @IsActive)
     ORDER BY ExpensesPaidToName;
 END;
 GO

@@ -25,7 +25,7 @@ BEGIN
     WHERE
         (@ExpensesTypeId IS NULL OR @ExpensesTypeId = '' OR ExpensesTypeId = @ExpensesTypeId)
         AND (@ExpensesTypeName IS NULL OR ExpensesTypeName LIKE '%' + @ExpensesTypeName + '%')
-        AND (@IsActive IS NULL OR IsActive = @IsActive)
+        --AND (@IsActive IS NULL OR IsActive = @IsActive)
     ORDER BY ExpensesTypeName;
 END;
 GO
