@@ -1,0 +1,130 @@
+﻿@page
+@model ExpensesEntryModel
+@{
+    ViewData["Title"] = "Expenses Entry";
+    Layout = "_ProLayout";
+}
+
+<form method="post">
+
+    <div class="container mt-3">
+
+        <div class="d-flex mb-3" style="gap:6px;">
+            <button formaction="?handler=Add" class="btn btn-primary btn-sm">Add → Grid</button>
+            <button formaction="?handler=Save" class="btn btn-success btn-sm">Save</button>
+        </div>
+
+        <div class="row">
+
+            <!-- LEFT FORM -->
+            <div class="col-6">
+
+                <div class="mb-2">
+                    <label>Expenses Type</label>
+                    <select asp-for="Row.ExpensesTypeId" asp-items="Model.ExpensesTypeList"
+                            class="form-control form-control-sm">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+
+                <div class="mb-2">
+                    <label>Paid Date</label>
+                    <input type="date" asp-for="Row.PaidDate" class="form-control form-control-sm" />
+                </div>
+
+                <div class="mb-2">
+                    <label>Paid To</label>
+                    <select asp-for="Row.ExpensesPaidToId" asp-items="Model.PaidToList"
+                            class="form-control form-control-sm">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+
+                <div class="mb-2">
+                    <label>Paid Amount</label>
+                    <input asp-for="Row.PaidAmount" class="form-control form-control-sm" />
+                </div>
+
+                <div class="mb-2">
+                    <label>Purpose</label>
+                    <select asp-for="Row.ExpensesPurposeId" asp-items="Model.PurposeList"
+                            class="form-control form-control-sm">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+
+                <div class="mb-2">
+                    <label>Description</label>
+                    <input asp-for="Row.Description" class="form-control form-control-sm" />
+                </div>
+
+            </div>
+
+            <!-- RIGHT GRID -->
+            <div class="col-6">
+
+                <h6 class="fw-bold text-center">Expenses Details</h6>
+
+                <table class="table table-bordered table-sm mt-2">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Paid To</th>
+                            <th>Amount</th>
+                            <th>Purpose</th>
+                            <th>Date</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Grid.Count; i++)
+                        {
+                            <tr>
+
+                                <td>@(i + 1)</td>
+
+                                <td>
+                                    @Model.Grid[i].ExpensesPaidToName
+                                    <input type="hidden" asp-for="Grid[i].ExpensesPaidToId" />
+                                    <input type="hidden" asp-for="Grid[i].ExpensesPaidToName" />
+                                </td>
+
+                                <td>
+                                    @Model.Grid[i].PaidAmount
+                                    <input type="hidden" asp-for="Grid[i].PaidAmount" />
+                                </td>
+
+                                <td>
+                                    @Model.Grid[i].ExpensesPurposeName
+                                    <input type="hidden" asp-for="Grid[i].ExpensesPurposeId" />
+                                    <input type="hidden" asp-for="Grid[i].ExpensesPurposeName" />
+                                </td>
+
+                                <td>
+                                    @Model.Grid[i].PaidDate?.ToString("dd-MM-yyyy")
+                                    <input type="hidden" asp-for="Grid[i].PaidDate" />
+                                </td>
+
+                                <td>
+                                    <button formaction="?handler=Delete&index=@i"
+                                            class="btn btn-sm btn-danger">
+                                        X
+                                    </button>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                <h6>Total Amount: @Model.TotalAmount</h6>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
