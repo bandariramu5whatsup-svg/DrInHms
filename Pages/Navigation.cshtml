@@ -1,0 +1,62 @@
+﻿@page
+@using System.Data
+@model HanuMediSoftCore.Pages.NavigationModel
+@{
+}
+
+
+<div class="row">
+
+    <!-- LEFT SIDE MENU -->
+    <div class="col-3 border-end">
+        <ul class="list-group">
+
+            @foreach (var mod in Model.ModuleList)
+            {
+                <li class="list-group-item">
+                    <b>@mod.ModuleName</b>
+
+                    <ul>
+                        @foreach (var menu in Model.MenuList.Where(x => x.ModuleId == mod.ModuleId))
+                        {
+                            <li>
+                                <a href="#" class="menu-link" data-menu="@menu.MenuId">@menu.MenuName</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+
+        </ul>
+    </div>
+
+    <!-- MIDDLE FORMS AREA -->
+    <div class="col-9" id="formContainer">
+        <h4>Select a menu to view forms</h4>
+    </div>
+
+</div>
+
+<script>
+    document.querySelectorAll(".menu-link").forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            let menuId = this.getAttribute("data-menu");
+
+            let forms = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.FormList));
+
+            let html = "<h4>Available Forms</h4><ul>";
+
+            forms.forEach(f => {
+                if (f.MenuId === menuId) {
+                    html += `<li><a href="${f.PageUrl}" target="_blank">${f.FormName}</a></li>`;
+                }
+            });
+
+            html += "</ul>";
+
+            document.getElementById("formContainer").innerHTML = html;
+        });
+    });
+</script>
