@@ -1,0 +1,181 @@
+﻿@page
+@model HanuMediSoftCore.Pages.Hms.Op.Masters.ConsultantDoctorModel
+@{
+} 
+ 
+<h2>Consultant Doctor</h2>
+
+<form method="post" asp-page-handler="Save">
+    <input type="hidden" asp-for="Input.ConsultantDoctorId" />
+
+    <fieldset>
+        <legend>Consultant Doctor</legend>
+
+        <div>
+            <label>Consultant Doctor Name</label>
+            <input asp-for="Input.ConsultantDoctorName" />
+        </div>
+
+        <div>
+            <label>Doctor Register No</label>
+            <input asp-for="Input.DoctorRegNo" />
+        </div>
+
+        <div>
+            <label>Department</label>
+            <select asp-for="Input.DepartmentId">
+                <option value="">--Select--</option>
+                @foreach (var d in Model.Departments)
+                {
+                    <option value="@d.Id">@d.Name</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <label>Specialization</label>
+            <select asp-for="Input.SpecilizationId">
+                <option value="">--Select--</option>
+                @foreach (var s in Model.Specializations)
+                {
+                    <option value="@s.Id">@s.Name</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <label>Qualification</label>
+            <input asp-for="Input.Qualification" />
+        </div>
+
+        <div>
+            <label>Mobile No</label>
+            <input asp-for="Input.MobileNO" />
+        </div>
+
+        <div>
+            <label>Age</label>
+            <input asp-for="Input.Age" />
+        </div>
+
+        <div>
+            <label>Gender</label>
+            <select asp-for="Input.Gender">
+                <option value="">--</option>
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+                <option value="2">Others</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Consult Time (Minutes)</label>
+            <input asp-for="Input.ConsultTimeInMinutes" />
+        </div>
+
+        <div>
+            <label>Between Time From</label>
+            <input asp-for="Input.ConsultTimeFromInterval" type="time" />
+        </div>
+
+        <div>
+            <label>Between Time To</label>
+            <input asp-for="Input.ConsultTimeToInterval" type="time" />
+        </div>
+
+        <div>
+            <label><input type="checkbox" value="1" asp-for="Input.Active" /> Active</label>
+        </div>
+        <div>
+            <label><input type="checkbox" value="1" asp-for="Input.ApplyReviewFeeAfterRegExpired" /> Apply Review Fee After Reg Expired</label>
+        </div>
+        <div>
+            <label><input type="checkbox" value="1" asp-for="Input.ApplyValidityConsultationsOldPatients" /> Apply Validity for Old Patients</label>
+        </div>
+    </fieldset>
+
+    <h3>Fee Details - General</h3>
+    <div>
+        <label>Consultation Fee (Total)</label>
+        <input asp-for="Input.GeneralConsultationFee" />
+    </div>
+    <div>
+        <label>To Hospital</label>
+        <input asp-for="Input.GeneralFeeToHospital" />
+    </div>
+    <div>
+        <label>To Doctor</label>
+        <input asp-for="Input.GeneralFeeToDoctor" />
+    </div>
+
+    <div>
+        <label>Review Fee (Total)</label>
+        <input asp-for="Input.GeneralReviewFee" />
+    </div>
+    <div>
+        <label>Review Fee To Hospital</label>
+        <input asp-for="Input.GeneralReviewFeeToHospital" />
+    </div>
+    <div>
+        <label>Review Fee To Doctor</label>
+        <input asp-for="Input.GeneralReviewFeeToDoctor" />
+    </div>
+
+    <h3>Fee Details - Emergency</h3>
+    <div>
+        <label>Consultation Fee (Total)</label>
+        <input asp-for="Input.EmergencyConsultationFee" />
+    </div>
+    <div>
+        <label>To Hospital</label>
+        <input asp-for="Input.EmergencyFeeToHospital" />
+    </div>
+    <div>
+        <label>To Doctor</label>
+        <input asp-for="Input.EmergencyFeeToDoctor" />
+    </div>
+
+    <div>
+        <label>Review Fee (Total)</label>
+        <input asp-for="Input.EmergencyReviewFee" />
+    </div>
+    <div>
+        <label>Review Fee To Hospital</label>
+        <input asp-for="Input.EmergencyReviewFeeToHospital" />
+    </div>
+    <div>
+        <label>Review Fee To Doctor</label>
+        <input asp-for="Input.EmergencyReviewFeeToDoctor" />
+    </div>
+
+    <h3>IP Consultation</h3>
+    <div>
+        <label>Consultation Fee</label>
+        <input asp-for="Input.IPConsultationFee" />
+    </div>
+    <div>
+        <label>To Hospital</label>
+        <input asp-for="Input.IPFeeToHospital" />
+    </div>
+    <div>
+        <label>To Doctor</label>
+        <input asp-for="Input.IPFeeToDoctor" />
+    </div>
+
+    <h3>Validity</h3>
+    <div>
+        <label>No Of Fee Days</label>
+        <input asp-for="Input.NoOfFeeDays" />
+    </div>
+    <div>
+        <label>No Of Reviews</label>
+        <input asp-for="Input.NoOfReviews" />
+    </div>
+
+    <button type="submit">Save</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ResultMessage))
+{
+    <div style="margin-top:10px;color:green">@Model.ResultMessage</div>
+}
