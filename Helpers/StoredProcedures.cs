@@ -83,6 +83,11 @@
         public const string Get = "SpOpGetPayCategories";
         public const string Save = "SpOpInsertPayCategories";
      }
+    public class SubInsuranceProcedures
+    {
+        public const string Get = "SpOpGetSubInsurance";
+        public const string Save = "SpOpInsertSubInsurance";
+     }
 
 
 }
