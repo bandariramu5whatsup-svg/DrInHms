@@ -78,5 +78,11 @@
         public const string DdGet = "SpOpDdGetExpensesTypes";
     }
 
+    public class PayCategoriesProcedures
+    {
+        public const string Get = "SpOpGetPayCategories";
+        public const string Save = "SpOpInsertPayCategories";
+     }
+
 
 }
