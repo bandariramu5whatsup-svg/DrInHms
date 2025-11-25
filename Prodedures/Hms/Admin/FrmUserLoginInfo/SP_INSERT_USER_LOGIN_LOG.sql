@@ -1,38 +1,28 @@
 GO
+CREATE SEQUENCE SubInsuranceId
+    INCREMENT BY 1
+    START WITH 1
+    NO MAXVALUE
+    NO CYCLE
+    NO CACHE;
 GO
-CREATE OR ALTER PROCEDURE SP_INSERT_USER_LOGIN_LOG
+
+CREATE TABLE SubInsuranceMaster
 (
-    @USER_ID           VARCHAR(50),
-    @IP_ADDRESS        NVARCHAR(50),
-    @BROWSER_INFO      NVARCHAR(500),
-    @ENTRY_USER_NAME   VARCHAR(100),
-    @ENTRY_USER_ID     VARCHAR(50),
-    @TERMINAL_ID       VARCHAR(100)
-)
+    SubInsuranceId         VARCHAR(30)     NOT NULL PRIMARY KEY,
+    SubInsuranceName       VARCHAR(100)    NULL,
+    SubInsuranceCode       VARCHAR(20)     NULL,
+	InsuranceId     VARCHAR(20)     NULL,  
+    IsActive              NUMERIC(1),
+   
 
-
---ram
-AS
-BEGIN
-    INSERT INTO USER_LOGIN_LOGS
-    (
-        USER_ID,
-        IP_ADDRESS,
-        BROWSER_INFO,
-        ENTRY_USER_NAME,
-        ENTRY_USER_ID,
-        TERMINAL_ID
-    )
-    VALUES
-    (
-        @USER_ID,
-        @IP_ADDRESS,
-        @BROWSER_INFO,
-        @ENTRY_USER_NAME,
-        @ENTRY_USER_ID,
-        @TERMINAL_ID
-    );
-
-    SELECT SCOPE_IDENTITY() AS LOG_ID;
-END
+    CreatedAt         DATETIME        DEFAULT(GETDATE()),
+    UpdatedAt         DATETIME        NULL,
+    CreatedById       VARCHAR(60)     NULL,
+    CreatedByName     VARCHAR(100)    NULL,
+    UpdatedById       VARCHAR(60)     NULL,
+    UpdatedByName     VARCHAR(100)    NULL,
+    WorkstationId     VARCHAR(100)    NULL
+);
 GO
+ 
