@@ -32,11 +32,15 @@ create table ConsultantDoctors
     GeneralReviewFee              DECIMAL(10,2) NULL,
     GeneralFeeToHospital          DECIMAL(10,2) NULL,
     GeneralFeeToDoctor            DECIMAL(10,2) NULL,
+    GeneralReviewFeeToHospital          DECIMAL(10,2) NULL,
+    GeneralReviewFeeToDoctor            DECIMAL(10,2) NULL,
 
     EmergencyConsultationFee      DECIMAL(10,2) NULL,
     EmergencyReviewFee            DECIMAL(10,2) NULL,
     EmergencyFeeToHospital        DECIMAL(10,2) NULL,
     EmergencyFeeToDoctor          DECIMAL(10,2) NULL,
+    EmergencyReviewFeeToHospital        DECIMAL(10,2) NULL,
+    EmergencyReviewFeeToDoctor          DECIMAL(10,2) NULL,
 
     IPConsultationFee             DECIMAL(10,2) NULL,
     IPFeeToHospital               DECIMAL(10,2) NULL,
