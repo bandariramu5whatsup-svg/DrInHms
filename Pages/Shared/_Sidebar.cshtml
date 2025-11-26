@@ -1,0 +1,26 @@
+﻿@model List<ModuleViewModel>
+
+<div class="sidebar">
+    @foreach (var module in Model)
+    {
+        <div class="module-title">@module.ModuleName</div>
+
+        @foreach (var menu in module.Menus)
+        {
+            <div class="menu-group">
+                <div class="menu-header">
+                    <i class="@menu.MenuIcon"></i> @menu.MenuName
+                </div>
+
+                <ul class="submenu">
+                    @foreach (var form in menu.Forms)
+                    {
+                        <li>
+                            <a asp-page="@form.PageUrl">@form.FormName</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+</div>
